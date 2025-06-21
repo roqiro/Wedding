@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takuya & Yuzuki Wedding</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom font application */
+        body {
+            font-family: 'Noto Serif JP', serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .font-great-vibes {
+            font-family: 'Great Vibes', cursive;
+        }
+        /* Scroll animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+            transition-timing-function: ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-700">
+
+    <!-- Header Section -->
+    <header class="relative h-screen bg-cover bg-center" style="background-image: url('https://placehold.co/1200x800/F5EFE6/78716C?text=OUR+WEDDING');">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center p-4">
+            <h2 class="font-great-vibes text-5xl md:text-7xl mb-2">Save the Date</h2>
+            <h1 class="font-great-vibes text-6xl md:text-9xl mb-4">Haruto & Yui</h1>
+            <p class="text-lg md:text-2xl tracking-widest">2025.11.22</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-6 md:p-12">
+
+        <!-- Invitation Section -->
+        <section class="text-center my-16 reveal">
+            <h2 class="font-great-vibes text-5xl mb-6 text-amber-800/80">Invitation</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                謹啓<br>
+                秋晴れの候 皆様におかれましては<br>
+                ご健勝のこととお慶び申し上げます
+            </p>
+            <p class="leading-relaxed mb-4">
+                このたび 私たちは結婚式を挙げることになりました<br>
+                つきましては 日頃お世話になっております皆様に<br>
+                感謝の気持ちを込めて ささやかな小宴を催したく存じます
+            </p>
+            <p class="leading-relaxed">
+                ご多用中とは存じますが<br>
+                ぜひご出席賜りますよう 心よりお待ち申し上げております
+            </p>
+            <p class="text-right mt-8">敬白</p>
+            <p class="text-2xl mt-8 tracking-wider">山田 春翔<br>田中 結衣</p>
+        </section>
+
+        <!-- 区切り線 -->
+        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
+
+        <!-- AI Story Section -->
+        <section class="my-16 reveal text-center">
+            <h2 class="font-great-vibes text-5xl text-center mb-6 text-amber-800/80">Our Story</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 md:p-10 max-w-2xl mx-auto">
+                <p class="leading-relaxed mb-6">
+                    私たちの出会いから今日までの物語、<br>AIに少しだけロマンチックに描いてもらいました。
+                </p>
+                <button id="generateStoryBtn" class="bg-gradient-to-r from-rose-400 to-orange-300 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mx-auto">
+                    <span class="mr-2">✨</span> 二人の物語を生成する
+                </button>
+                <div id="storyResultContainer" class="mt-6 hidden text-left">
+                    <div id="storyLoadingIndicator" class="text-center p-4">
+                        <i class="fas fa-spinner fa-spin fa-2x text-rose-400"></i>
+                        <p class="mt-2 text-stone-600">物語を紡いでいます...</p>
+                    </div>
+                    <div id="storyResult" class="bg-stone-100 rounded-md p-6 text-stone-700 whitespace-pre-wrap leading-loose"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 区切り線 -->
+        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
+
+        <!-- Date & Location Section -->
+        <section class="my-16 reveal">
+            <h2 class="font-great-vibes text-5xl text-center mb-12 text-amber-800/80">Information</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 md:p-10">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Date/Time info -->
+                    <div>
+                        <div class="flex items-center mb-6">
+                            <i class="fa-solid fa-calendar-heart fa-2x text-amber-700/70 mr-4"></i>
+                            <h3 class="text-2xl font-bold">日時</h3>
+                        </div>
+                        <p class="text-lg">2025年11月22日 (土曜日)</p>
+                        <ul class="mt-4 space-y-2 text-stone-600 pl-2">
+                            <li><span class="font-semibold">受付:</span> 11:00 AM</li>
+                            <li><span class="font-semibold">挙式:</span> 11:30 AM</li>
+                            <li><span class="font-semibold">披露宴:</span> 1:00 PM</li>
+                        </ul>
+                         <div class="mt-6 text-sm text-stone-500">
+                            <p>誠に勝手ながら会費制とさせていただきます</p>
+                            <p>男性: 15,000円 / 女性: 13,000円</p>
+                        </div>
+                    </div>
+                    <!-- Location info -->
+                    <div>
+                        <div class="flex items-center mb-6">
+                            <i class="fa-solid fa-location-dot fa-2x text-amber-700/70 mr-4"></i>
+                            <h3 class="text-2xl font-bold">場所</h3>
+                        </div>
+                        <p class="text-lg font-semibold">Maison de Forêt</p>
+                        <p class="text-stone-600">〒150-0013 東京都渋谷区恵比寿1-2-3</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Maison+de+Forêt+恵比寿" target="_blank" class="inline-block mt-4 bg-amber-700/80 text-white py-2 px-4 rounded-lg hover:bg-amber-800/80 transition-colors">
+                            <i class="fa-solid fa-map-location-dot mr-2"></i>Google マップで見る
+                        </a>
+                    </div>
+                </div>
+                 <!-- Dress Code -->
+                <div class="mt-8 pt-6 border-t border-stone-200">
+                     <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-user-tie fa-2x text-amber-700/70 mr-4"></i>
+                        <h3 class="text-2xl font-bold">服装</h3>
+                    </div>
+                    <p class="text-stone-600">当日は平服でお気軽にお越しください</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 区切り線 -->
+        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
+
+        <!-- Photo Gallery Section -->
+        <section class="my-16 reveal">
+             <h2 class="font-great-vibes text-5xl text-center mb-12 text-amber-800/80">Photo Gallery</h2>
+             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <img src="https://placehold.co/600x400/EADBC8/967E76?text=Photo+1" alt="二人の写真1" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <img src="https://placehold.co/600x400/DAC0A3/967E76?text=Photo+2" alt="二人の写真2" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <img src="https://placehold.co/600x400/F5EFE6/967E76?text=Photo+3" alt="二人の写真3" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <img src="https://placehold.co/600x400/EFEAD8/967E76?text=Photo+4" alt="二人の写真4" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 col-span-2 md:col-span-1">
+                <img src="https://placehold.co/600x400/D8C4B6/967E76?text=Photo+5" alt="二人の写真5" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <img src="https://placehold.co/600x400/FDF7E4/967E76?text=Photo+6" alt="二人の写真6" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+             </div>
+        </section>
+
+        <!-- 区切り線 -->
+        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
+
+        <!-- AI Message Helper Section -->
+        <section class="my-16 reveal">
+            <h2 class="font-great-vibes text-5xl text-center mb-6 text-amber-800/80">Message Helper</h2>
+            <p class="text-center leading-relaxed mb-8">
+                お祝いのメッセージに悩んだら…<br>AIが素敵なメッセージのアイデアをご提案します。
+            </p>
+            <div class="bg-white rounded-lg shadow-lg p-8 md:p-10 max-w-2xl mx-auto">
+                <div class="mb-4">
+                    <label for="guestName" class="block text-stone-700 text-sm font-bold mb-2">お名前（任意）:</label>
+                    <input type="text" id="guestName" name="guestName" placeholder="田中 花子" class="shadow appearance-none border rounded w-full py-2 px-3 text-stone-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <button id="generateMessageBtn" class="w-full bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold py-3 px-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
+                    <span class="mr-2">✨</span> お祝いメッセージを生成する
+                </button>
+                <div id="messageResultContainer" class="mt-6 hidden">
+                    <h3 class="text-xl font-bold mb-2 text-stone-800">生成されたメッセージ:</h3>
+                    <div id="loadingIndicator" class="text-center p-4">
+                        <i class="fas fa-spinner fa-spin fa-2x text-amber-700/70"></i>
+                        <p class="mt-2 text-stone-600">生成中です...</p>
+                    </div>
+                    <div id="messageResult" class="bg-stone-100 rounded-md p-4 text-stone-700 whitespace-pre-wrap leading-relaxed"></div>
+                    <button id="copyMessageBtn" class="mt-4 bg-amber-700/80 text-white py-2 px-4 rounded-lg hover:bg-amber-800/80 transition-colors w-full md:w-auto hidden">
+                        <i class="fa-solid fa-copy mr-2"></i> テキストをコピー
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 区切り線 -->
+        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
+
+        <!-- RSVP Section -->
+        <section class="text-center my-16 reveal">
+            <h2 class="font-great-vibes text-5xl mb-6 text-amber-800/80">RSVP</h2>
+            <p class="leading-relaxed mb-8">
+                お手数ですが 下記フォームより<br>
+                <span class="font-bold">10月15日(水)</span>までにご返信くださいますよう<br>
+                お願い申し上げます
+            </p>
+            <a href="#messageResultContainer" class="inline-block bg-gradient-to-r from-amber-600 to-amber-800 text-white font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                出欠連絡フォームへ
+            </a>
+             <div class="mt-8 text-sm text-stone-500">
+                <p>ご祝儀などのお心遣いは固くご辞退申し上げます</p>
+                <p>皆様にお会いできますことを心より楽しみにしております</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-200/60 py-8 text-center text-stone-600">
+        <p class="font-great-vibes text-4xl">Haruto & Yui</p>
+        <p class="mt-2">Thank you for celebrating with us!</p>
+    </footer>
+
+    <script>
+        // --- Intersection Observer for scroll animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // Fire when 10% of the element is visible
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Gemini API Integration ---
+
+        // Helper function to call the Gemini API
+        async function callGemini(prompt) {
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                return result.candidates[0].content.parts[0].text;
+            } else {
+                // Check for safety-related blocks
+                if (result.promptFeedback && result.promptFeedback.blockReason) {
+                     console.error('Prompt blocked:', result.promptFeedback.blockReason);
+                     return '生成できませんでした。内容を確認してください。';
+                }
+                return '予期せぬエラーが発生しました。';
+            }
+        }
+
+        // --- "Our Story" Generator ---
+        const generateStoryBtn = document.getElementById('generateStoryBtn');
+        const storyResultContainer = document.getElementById('storyResultContainer');
+        const storyLoadingIndicator = document.getElementById('storyLoadingIndicator');
+        const storyResultDiv = document.getElementById('storyResult');
+
+        if (generateStoryBtn) {
+            generateStoryBtn.addEventListener('click', async () => {
+                generateStoryBtn.disabled = true;
+                generateStoryBtn.textContent = '生成中...';
+                storyResultContainer.style.display = 'block';
+                storyLoadingIndicator.style.display = 'block';
+                storyResultDiv.style.display = 'none';
+
+                const prompt = `
+                    新郎「山田春翔」と新婦「田中結衣」の出会いから結婚に至るまでの、短くロマンチックな物語を創作してください。
+                    以下のキーワードを参考に、想像を膨らませて物語を作ってください。
+                    - キーワード: 共通の趣味である「カフェ巡り」、雨の日の「相合傘」、思い出の場所「海辺の公園」、プロポーズの言葉「これからの人生も、一緒に歩んでください」
+                    - 文体: 優しく、心温まるような物語調
+                    - 長さ: 300字程度
+                    - 読者が二人のことをもっと好きになるような、素敵な物語にしてください。`;
+
+                try {
+                    const storyText = await callGemini(prompt);
+                    storyResultDiv.textContent = storyText.trim();
+                } catch (error) {
+                    console.error('Error generating story:', error);
+                    storyResultDiv.textContent = 'エラーが発生しました。物語を生成できませんでした。';
+                } finally {
+                    storyLoadingIndicator.style.display = 'none';
+                    storyResultDiv.style.display = 'block';
+                    generateStoryBtn.style.display = 'none'; // Hide button after use
+                }
+            });
+        }
+
+        // --- Congratulatory Message Generator ---
+        const generateMessageBtn = document.getElementById('generateMessageBtn');
+        const guestNameInput = document.getElementById('guestName');
+        const messageResultContainer = document.getElementById('messageResultContainer');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const messageResultDiv = document.getElementById('messageResult');
+        const copyMessageBtn = document.getElementById('copyMessageBtn');
+        
+        if (generateMessageBtn) {
+            generateMessageBtn.addEventListener('click', async () => {
+                messageResultContainer.style.display = 'block';
+                loadingIndicator.style.display = 'block';
+                messageResultDiv.style.display = 'none';
+                copyMessageBtn.style.display = 'none';
+
+                const guestName = guestNameInput.value.trim();
+                const prompt = `
+                    山田春翔様と田中結衣様の結婚を祝う、心温まるお祝いのメッセージを生成してください。
+                    フォーマルでありながらも、親しみやすい雰囲気にしてください。
+                    メッセージの長さは150文字程度でお願いします。
+                    ${guestName ? `メッセージの最後に、署名として「${guestName} より」と付け加えてください。` : '署名は不要です。'}
+                    良い例:「ご結婚おめでとうございます！お二人の未来が愛と喜びに満ち溢れるものでありますように。春翔さんと結衣さんの素敵な笑顔が大好きです。末永くお幸せに！」`;
+                
+                try {
+                    const messageText = await callGemini(prompt);
+                    messageResultDiv.textContent = messageText.trim();
+                } catch (error) {
+                    console.error('Error generating message:', error);
+                    messageResultDiv.textContent = 'エラーが発生しました。しばらくしてから再度お試しください。';
+                } finally {
+                    loadingIndicator.style.display = 'none';
+                    messageResultDiv.style.display = 'block';
+                    copyMessageBtn.style.display = 'inline-block';
+                }
+            });
+        }
+
+        // --- Copy to Clipboard Functionality ---
+        if(copyMessageBtn) {
+            copyMessageBtn.addEventListener('click', () => {
+                const textToCopy = messageResultDiv.textContent;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyMessageBtn.textContent = 'コピーしました！';
+                    setTimeout(() => {
+                        copyMessageBtn.innerHTML = '<i class="fa-solid fa-copy mr-2"></i> テキストをコピー';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    copyMessageBtn.textContent = 'コピーに失敗';
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+    </script>
+</body>
+</html>
