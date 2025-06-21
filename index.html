@@ -11,218 +11,276 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif+JP:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Custom font application */
+        /* カスタムフォントを適用 */
         body {
             font-family: 'Noto Serif JP', serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-color: #F3F4F6; /* 背景を落ち着いたストーングレーに */
         }
         .font-great-vibes {
             font-family: 'Great Vibes', cursive;
         }
-        /* Scroll animation */
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* ヘッダーのパララックス効果用 */
+        .parallax-header {
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        /* ヘッダーのフェードインアニメーション */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1.5s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        
+        /* スクロールアニメーション */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s, transform 0.8s;
-            transition-timing-function: ease-out;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ライトボックス（フォトギャラリー拡大表示）用のスタイル */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            user-select: none;
+            padding: 1rem;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .lightbox-nav:hover {
+            opacity: 1;
+        }
+        .lightbox-prev {
+            left: 15px;
+        }
+        .lightbox-next {
+            right: 15px;
+        }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-700">
+<body class="bg-stone-100 text-stone-800">
 
-    <!-- Header Section -->
-    <header class="relative h-screen bg-cover bg-center" style="background-image: url('https://placehold.co/1200x800/F5EFE6/78716C?text=OUR+WEDDING');">
-        <div class="absolute inset-0 bg-black/30"></div>
+    <!-- ヘッダーセクション -->
+    <header id="header" class="relative h-screen bg-cover bg-center parallax-header" style="background-image: url('https://images.unsplash.com/photo-1473136701383-754239e9d48c?q=80&w=2070&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-black/50"></div>
         <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center p-4">
-            <h2 class="font-great-vibes text-5xl md:text-7xl mb-2">Save the Date</h2>
-            <h1 class="font-great-vibes text-6xl md:text-9xl mb-4">Haruto & Yui</h1>
-            <p class="text-lg md:text-2xl tracking-widest">2025.11.22</p>
+            <div class="animate-fade-in-up">
+                <h1 class="font-great-vibes text-7xl md:text-9xl" style="text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">Takuya & Yuzuki</h1>
+                <p class="font-montserrat tracking-widest text-lg md:text-xl mt-4" style="text-shadow: 1px 1px 8px rgba(0,0,0,0.5);">2025.07.18</p>
+            </div>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto p-6 md:p-12">
-
-        <!-- Invitation Section -->
+        
+        <!-- カウントダウンセクション -->
         <section class="text-center my-16 reveal">
-            <h2 class="font-great-vibes text-5xl mb-6 text-amber-800/80">Invitation</h2>
-            <p class="text-lg leading-relaxed mb-4">
-                謹啓<br>
-                秋晴れの候 皆様におかれましては<br>
-                ご健勝のこととお慶び申し上げます
-            </p>
-            <p class="leading-relaxed mb-4">
-                このたび 私たちは結婚式を挙げることになりました<br>
-                つきましては 日頃お世話になっております皆様に<br>
-                感謝の気持ちを込めて ささやかな小宴を催したく存じます
-            </p>
-            <p class="leading-relaxed">
-                ご多用中とは存じますが<br>
-                ぜひご出席賜りますよう 心よりお待ち申し上げております
-            </p>
-            <p class="text-right mt-8">敬白</p>
-            <p class="text-2xl mt-8 tracking-wider">山田 春翔<br>田中 結衣</p>
+            <h2 class="font-great-vibes text-5xl mb-8 text-green-900/90">Wedding Day</h2>
+            <div id="countdown" class="flex justify-center text-center gap-4 md:gap-8">
+                <!-- JavaScriptで中身が生成されます -->
+            </div>
         </section>
 
-        <!-- 区切り線 -->
-        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
-
-        <!-- AI Story Section -->
-        <section class="my-16 reveal text-center">
-            <h2 class="font-great-vibes text-5xl text-center mb-6 text-amber-800/80">Our Story</h2>
-            <div class="bg-white rounded-lg shadow-lg p-8 md:p-10 max-w-2xl mx-auto">
-                <p class="leading-relaxed mb-6">
-                    私たちの出会いから今日までの物語、<br>AIに少しだけロマンチックに描いてもらいました。
+        <!-- ご挨拶セクション -->
+        <section class="text-center my-16 reveal">
+            <h2 class="font-great-vibes text-5xl mb-6 text-green-900/90">Welcome</h2>
+            <div class="bg-white/50 rounded-lg p-8 shadow-inner" style="background-image: url('https://www.transparenttextures.com/patterns/concrete-wall-3.png');">
+                <p class="text-lg leading-relaxed mb-4">
+                    この度は 私たちの結婚式にご出席くださり<br>
+                    誠にありがとうございます
                 </p>
-                <button id="generateStoryBtn" class="bg-gradient-to-r from-rose-400 to-orange-300 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mx-auto">
-                    <span class="mr-2">✨</span> 二人の物語を生成する
-                </button>
-                <div id="storyResultContainer" class="mt-6 hidden text-left">
-                    <div id="storyLoadingIndicator" class="text-center p-4">
-                        <i class="fas fa-spinner fa-spin fa-2x text-rose-400"></i>
-                        <p class="mt-2 text-stone-600">物語を紡いでいます...</p>
-                    </div>
-                    <div id="storyResult" class="bg-stone-100 rounded-md p-6 text-stone-700 whitespace-pre-wrap leading-loose"></div>
-                </div>
+                <p class="leading-relaxed mb-4">
+                    軽井沢の美しい自然のなかで<br>
+                    皆様と心温まるひとときを過ごせますことを<br>
+                    心より楽しみにしております
+                </p>
+                <p class="leading-relaxed">
+                    短い時間ではございますが<br>
+                    どうぞごゆっくりお過ごしください
+                </p>
+                <p class="text-2xl mt-12 tracking-wider">稲垣 拓也<br>悠月</p>
             </div>
         </section>
 
         <!-- 区切り線 -->
-        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
+        <div class="border-b-2 border-dotted border-stone-400 my-16"></div>
 
-        <!-- Date & Location Section -->
+        <!-- 日時・場所セクション -->
         <section class="my-16 reveal">
-            <h2 class="font-great-vibes text-5xl text-center mb-12 text-amber-800/80">Information</h2>
-            <div class="bg-white rounded-lg shadow-lg p-8 md:p-10">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Date/Time info -->
+            <h2 class="font-great-vibes text-5xl text-center mb-12 text-green-900/90">Information</h2>
+            <div class="bg-stone-200/70 rounded-lg shadow-lg p-8 md:p-10" style="background-image: url('https://www.transparenttextures.com/patterns/rocky-wall.png');">
+                <div class="grid md:grid-cols-2 gap-10">
+                    <!-- スケジュール -->
                     <div>
                         <div class="flex items-center mb-6">
-                            <i class="fa-solid fa-calendar-heart fa-2x text-amber-700/70 mr-4"></i>
-                            <h3 class="text-2xl font-bold">日時</h3>
+                            <i class="fa-solid fa-clock fa-2x text-green-800/80 mr-4"></i>
+                            <h3 class="text-2xl font-bold">当日のスケジュール</h3>
                         </div>
-                        <p class="text-lg">2025年11月22日 (土曜日)</p>
-                        <ul class="mt-4 space-y-2 text-stone-600 pl-2">
-                            <li><span class="font-semibold">受付:</span> 11:00 AM</li>
-                            <li><span class="font-semibold">挙式:</span> 11:30 AM</li>
-                            <li><span class="font-semibold">披露宴:</span> 1:00 PM</li>
+                        <p class="text-lg">2025年7月18日 (金曜日)</p>
+                        <ul class="mt-4 space-y-2 text-stone-700 pl-2">
+                            <li><span class="font-semibold">ご集合:</span> 16:15</li>
+                            <li><span class="font-semibold">挙式:</span> 16:45</li>
+                            <li><span class="font-semibold">披露宴:</span> 18:15</li>
                         </ul>
-                         <div class="mt-6 text-sm text-stone-500">
-                            <p>誠に勝手ながら会費制とさせていただきます</p>
-                            <p>男性: 15,000円 / 女性: 13,000円</p>
-                        </div>
                     </div>
-                    <!-- Location info -->
+                    <!-- 場所のご案内 -->
                     <div>
                         <div class="flex items-center mb-6">
-                            <i class="fa-solid fa-location-dot fa-2x text-amber-700/70 mr-4"></i>
-                            <h3 class="text-2xl font-bold">場所</h3>
+                            <i class="fa-solid fa-map-location-dot fa-2x text-green-800/80 mr-4"></i>
+                            <h3 class="text-2xl font-bold">場所のご案内</h3>
                         </div>
-                        <p class="text-lg font-semibold">Maison de Forêt</p>
-                        <p class="text-stone-600">〒150-0013 東京都渋谷区恵比寿1-2-3</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Maison+de+Forêt+恵比寿" target="_blank" class="inline-block mt-4 bg-amber-700/80 text-white py-2 px-4 rounded-lg hover:bg-amber-800/80 transition-colors">
-                            <i class="fa-solid fa-map-location-dot mr-2"></i>Google マップで見る
+                        <ul class="mt-4 space-y-3 text-stone-700">
+                             <li><p class="font-semibold">ご集合:</p><p>2階参列者様集合ロビー</p></li>
+                             <li><p class="font-semibold">挙式:</p><p>石の教会</p></li>
+                             <li><p class="font-semibold">披露宴:</p><p>SOURA</p></li>
+                        </ul>
+                        <p class="text-sm mt-4">※受付は披露宴会場「SOURA」の入場時に行います。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=軽井沢ホテルブレストンコート" target="_blank" class="inline-block mt-6 bg-green-800/90 text-white py-2 px-4 rounded-lg hover:bg-green-900 transition-colors">
+                            <i class="fa-solid fa-hotel mr-2"></i>軽井沢ホテルブレストンコート
                         </a>
                     </div>
                 </div>
-                 <!-- Dress Code -->
-                <div class="mt-8 pt-6 border-t border-stone-200">
-                     <div class="flex items-center mb-4">
-                        <i class="fa-solid fa-user-tie fa-2x text-amber-700/70 mr-4"></i>
-                        <h3 class="text-2xl font-bold">服装</h3>
-                    </div>
-                    <p class="text-stone-600">当日は平服でお気軽にお越しください</p>
-                </div>
             </div>
         </section>
 
         <!-- 区切り線 -->
-        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
-
-        <!-- Photo Gallery Section -->
+        <div class="border-b-2 border-dotted border-stone-400 my-16"></div>
+        
+        <!-- ご宿泊の皆様へセクション -->
         <section class="my-16 reveal">
-             <h2 class="font-great-vibes text-5xl text-center mb-12 text-amber-800/80">Photo Gallery</h2>
-             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <img src="https://placehold.co/600x400/EADBC8/967E76?text=Photo+1" alt="二人の写真1" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                <img src="https://placehold.co/600x400/DAC0A3/967E76?text=Photo+2" alt="二人の写真2" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                <img src="https://placehold.co/600x400/F5EFE6/967E76?text=Photo+3" alt="二人の写真3" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                <img src="https://placehold.co/600x400/EFEAD8/967E76?text=Photo+4" alt="二人の写真4" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 col-span-2 md:col-span-1">
-                <img src="https://placehold.co/600x400/D8C4B6/967E76?text=Photo+5" alt="二人の写真5" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                <img src="https://placehold.co/600x400/FDF7E4/967E76?text=Photo+6" alt="二人の写真6" class="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+            <h2 class="font-great-vibes text-5xl text-center mb-12 text-green-900/90">For Our Guests</h2>
+            <div class="bg-white/60 rounded-lg shadow-lg p-8 md:p-10">
+                <div class="flex items-center mb-6">
+                    <i class="fa-solid fa-suitcase-rolling fa-2x text-green-800/80 mr-4"></i>
+                    <h3 class="text-2xl font-bold">ご宿泊について</h3>
+                </div>
+                <div class="space-y-6 text-stone-700">
+                    <div>
+                        <h4 class="font-semibold text-lg flex items-center"><i class="fa-solid fa-bed mr-3 text-green-700/80"></i>BEB5軽井沢にご宿泊の皆様へ</h4>
+                        <p class="mt-2 pl-8">チェックインは披露宴終了後に行っていただく予定です。お荷物はフロントにお預けいただけます。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg flex items-center"><i class="fa-solid fa-hot-tub-station mr-3 text-green-700/80"></i>星野温泉 トンボの湯</h4>
+                        <p class="mt-2 pl-8">BEB5ご宿泊の方は、トンボの湯をご利用いただけます。夜は満天の星空の下で、朝は爽やかな空気の中で、特別な時間をお過ごしください。</p>
+                        <div class="mt-4 ml-8 p-4 bg-green-50/70 rounded-lg border-l-4 border-green-600">
+                           <p class="font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i>ご注意</p>
+                           <p>夜の最終入場は <span class="text-red-600 font-bold">21:30</span> となっておりますのでご注意ください。</p>
+                           <p class="mt-1">もちろん、翌日の朝風呂もおすすめです！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 区切り線 -->
+        <div class="border-b-2 border-dotted border-stone-400 my-16"></div>
+
+        <!-- フォトギャラリーセクション -->
+        <section class="my-16 reveal">
+             <h2 class="font-great-vibes text-5xl text-center mb-12 text-green-900/90">Photo Gallery</h2>
+             <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- 写真をここに追加 -->
+                <a href="https://placehold.co/800x600/588157/F1F1F1?text=Photo+1" class="gallery-item"><img src="https://placehold.co/600x400/588157/F1F1F1?text=Photo+1" alt="二人の写真1" class="rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"></a>
+                <a href="https://placehold.co/800x600/3A5A40/F1F1F1?text=Photo+2" class="gallery-item"><img src="https://placehold.co/600x400/3A5A40/F1F1F1?text=Photo+2" alt="二人の写真2" class="rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"></a>
+                <a href="https://placehold.co/800x600/344E41/F1F1F1?text=Photo+3" class="gallery-item"><img src="https://placehold.co/600x400/344E41/F1F1F1?text=Photo+3" alt="二人の写真3" class="rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"></a>
+                <a href="https://placehold.co/800x600/A3B18A/F1F1F1?text=Photo+4" class="gallery-item col-span-2 md:col-span-1"><img src="https://placehold.co/600x400/A3B18A/F1F1F1?text=Photo+4" alt="二人の写真4" class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"></a>
+                <a href="https://placehold.co/800x600/DAD7CD/3A5A40?text=Photo+5" class="gallery-item"><img src="https://placehold.co/600x400/DAD7CD/3A5A40?text=Photo+5" alt="二人の写真5" class="rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"></a>
+                <a href="https://placehold.co/800x600/BEC2B3/3A5A40?text=Photo+6" class="gallery-item"><img src="https://placehold.co/600x400/BEC2B3/3A5A40?text=Photo+6" alt="二人の写真6" class="rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"></a>
              </div>
-        </section>
-
-        <!-- 区切り線 -->
-        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
-
-        <!-- AI Message Helper Section -->
-        <section class="my-16 reveal">
-            <h2 class="font-great-vibes text-5xl text-center mb-6 text-amber-800/80">Message Helper</h2>
-            <p class="text-center leading-relaxed mb-8">
-                お祝いのメッセージに悩んだら…<br>AIが素敵なメッセージのアイデアをご提案します。
-            </p>
-            <div class="bg-white rounded-lg shadow-lg p-8 md:p-10 max-w-2xl mx-auto">
-                <div class="mb-4">
-                    <label for="guestName" class="block text-stone-700 text-sm font-bold mb-2">お名前（任意）:</label>
-                    <input type="text" id="guestName" name="guestName" placeholder="田中 花子" class="shadow appearance-none border rounded w-full py-2 px-3 text-stone-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <button id="generateMessageBtn" class="w-full bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold py-3 px-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
-                    <span class="mr-2">✨</span> お祝いメッセージを生成する
-                </button>
-                <div id="messageResultContainer" class="mt-6 hidden">
-                    <h3 class="text-xl font-bold mb-2 text-stone-800">生成されたメッセージ:</h3>
-                    <div id="loadingIndicator" class="text-center p-4">
-                        <i class="fas fa-spinner fa-spin fa-2x text-amber-700/70"></i>
-                        <p class="mt-2 text-stone-600">生成中です...</p>
-                    </div>
-                    <div id="messageResult" class="bg-stone-100 rounded-md p-4 text-stone-700 whitespace-pre-wrap leading-relaxed"></div>
-                    <button id="copyMessageBtn" class="mt-4 bg-amber-700/80 text-white py-2 px-4 rounded-lg hover:bg-amber-800/80 transition-colors w-full md:w-auto hidden">
-                        <i class="fa-solid fa-copy mr-2"></i> テキストをコピー
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 区切り線 -->
-        <div class="border-b-2 border-dotted border-stone-300 my-16"></div>
-
-        <!-- RSVP Section -->
-        <section class="text-center my-16 reveal">
-            <h2 class="font-great-vibes text-5xl mb-6 text-amber-800/80">RSVP</h2>
-            <p class="leading-relaxed mb-8">
-                お手数ですが 下記フォームより<br>
-                <span class="font-bold">10月15日(水)</span>までにご返信くださいますよう<br>
-                お願い申し上げます
-            </p>
-            <a href="#messageResultContainer" class="inline-block bg-gradient-to-r from-amber-600 to-amber-800 text-white font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                出欠連絡フォームへ
-            </a>
-             <div class="mt-8 text-sm text-stone-500">
-                <p>ご祝儀などのお心遣いは固くご辞退申し上げます</p>
-                <p>皆様にお会いできますことを心より楽しみにしております</p>
-            </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-stone-200/60 py-8 text-center text-stone-600">
-        <p class="font-great-vibes text-4xl">Haruto & Yui</p>
+    <!-- フッター -->
+    <footer class="bg-stone-200/60 py-8 text-center text-stone-700">
+        <p class="font-great-vibes text-4xl">Takuya & Yuzuki</p>
         <p class="mt-2">Thank you for celebrating with us!</p>
     </footer>
 
+    <!-- ライトボックスのHTML -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-nav lightbox-prev"><i class="fa-solid fa-chevron-left"></i></span>
+        <img class="lightbox-content" id="lightbox-img">
+        <span class="lightbox-nav lightbox-next"><i class="fa-solid fa-chevron-right"></i></span>
+    </div>
+
     <script>
-        // --- Intersection Observer for scroll animations ---
+        // --- 設定項目 ---
+        // 結婚式の日付を設定してください (年, 月-1, 日, 時, 分, 秒)
+        const weddingDate = new Date(2025, 6, 18, 16, 45, 0).getTime();
+
+        // --- パララックス効果 ---
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            let offset = window.pageYOffset;
+            header.style.backgroundPositionY = offset * 0.5 + 'px';
+        });
+
+        // --- スクロールでのフェードイン ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -230,141 +288,102 @@
                 }
             });
         }, {
-            threshold: 0.1 // Fire when 10% of the element is visible
+            threshold: 0.1
         });
 
         document.querySelectorAll('.reveal').forEach(el => {
             observer.observe(el);
         });
 
-        // --- Gemini API Integration ---
+        // --- カウントダウンタイマー ---
+        const countdownElement = document.getElementById('countdown');
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-        // Helper function to call the Gemini API
-        async function callGemini(prompt) {
-            const apiKey = ""; // API key is handled by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}`);
+            if (distance < 0) {
+                countdownElement.innerHTML = `<div class="text-3xl font-bold text-green-800/90">Our Wedding Day!</div>`;
+                clearInterval(countdownInterval);
+                return;
             }
 
-            const result = await response.json();
-            
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
-                return result.candidates[0].content.parts[0].text;
-            } else {
-                // Check for safety-related blocks
-                if (result.promptFeedback && result.promptFeedback.blockReason) {
-                     console.error('Prompt blocked:', result.promptFeedback.blockReason);
-                     return '生成できませんでした。内容を確認してください。';
-                }
-                return '予期せぬエラーが発生しました。';
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `
+                <div class="bg-stone-50/50 p-4 rounded-lg shadow-lg w-24 backdrop-blur-sm">
+                    <div class="text-4xl md:text-5xl font-bold text-green-900/90">${String(days).padStart(2, '0')}</div>
+                    <div class="text-xs md:text-sm text-stone-600 mt-1">Days</div>
+                </div>
+                <div class="bg-stone-50/50 p-4 rounded-lg shadow-lg w-24 backdrop-blur-sm">
+                    <div class="text-4xl md:text-5xl font-bold text-green-900/90">${String(hours).padStart(2, '0')}</div>
+                    <div class="text-xs md:text-sm text-stone-600 mt-1">Hours</div>
+                </div>
+                <div class="bg-stone-50/50 p-4 rounded-lg shadow-lg w-24 backdrop-blur-sm">
+                    <div class="text-4xl md:text-5xl font-bold text-green-900/90">${String(minutes).padStart(2, '0')}</div>
+                    <div class="text-xs md:text-sm text-stone-600 mt-1">Minutes</div>
+                </div>
+                <div class="bg-stone-50/50 p-4 rounded-lg shadow-lg w-24 backdrop-blur-sm">
+                    <div class="text-4xl md:text-5xl font-bold text-green-900/90">${String(seconds).padStart(2, '0')}</div>
+                    <div class="text-xs md:text-sm text-stone-600 mt-1">Seconds</div>
+                </div>
+            `;
+        };
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- ライトボックス（フォトギャラリー） ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
+        let currentIndex = 0;
+
+        const showImage = (index) => {
+            lightboxImg.src = galleryItems[index].href;
+            currentIndex = index;
+        };
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                lightbox.classList.add('active');
+                showImage(index);
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
             }
-        }
+        });
 
-        // --- "Our Story" Generator ---
-        const generateStoryBtn = document.getElementById('generateStoryBtn');
-        const storyResultContainer = document.getElementById('storyResultContainer');
-        const storyLoadingIndicator = document.getElementById('storyLoadingIndicator');
-        const storyResultDiv = document.getElementById('storyResult');
+        prevBtn.addEventListener('click', () => {
+            const newIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            showImage(newIndex);
+        });
 
-        if (generateStoryBtn) {
-            generateStoryBtn.addEventListener('click', async () => {
-                generateStoryBtn.disabled = true;
-                generateStoryBtn.textContent = '生成中...';
-                storyResultContainer.style.display = 'block';
-                storyLoadingIndicator.style.display = 'block';
-                storyResultDiv.style.display = 'none';
+        nextBtn.addEventListener('click', () => {
+            const newIndex = (currentIndex + 1) % galleryItems.length;
+            showImage(newIndex);
+        });
 
-                const prompt = `
-                    新郎「山田春翔」と新婦「田中結衣」の出会いから結婚に至るまでの、短くロマンチックな物語を創作してください。
-                    以下のキーワードを参考に、想像を膨らませて物語を作ってください。
-                    - キーワード: 共通の趣味である「カフェ巡り」、雨の日の「相合傘」、思い出の場所「海辺の公園」、プロポーズの言葉「これからの人生も、一緒に歩んでください」
-                    - 文体: 優しく、心温まるような物語調
-                    - 長さ: 300字程度
-                    - 読者が二人のことをもっと好きになるような、素敵な物語にしてください。`;
-
-                try {
-                    const storyText = await callGemini(prompt);
-                    storyResultDiv.textContent = storyText.trim();
-                } catch (error) {
-                    console.error('Error generating story:', error);
-                    storyResultDiv.textContent = 'エラーが発生しました。物語を生成できませんでした。';
-                } finally {
-                    storyLoadingIndicator.style.display = 'none';
-                    storyResultDiv.style.display = 'block';
-                    generateStoryBtn.style.display = 'none'; // Hide button after use
-                }
-            });
-        }
-
-        // --- Congratulatory Message Generator ---
-        const generateMessageBtn = document.getElementById('generateMessageBtn');
-        const guestNameInput = document.getElementById('guestName');
-        const messageResultContainer = document.getElementById('messageResultContainer');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const messageResultDiv = document.getElementById('messageResult');
-        const copyMessageBtn = document.getElementById('copyMessageBtn');
-        
-        if (generateMessageBtn) {
-            generateMessageBtn.addEventListener('click', async () => {
-                messageResultContainer.style.display = 'block';
-                loadingIndicator.style.display = 'block';
-                messageResultDiv.style.display = 'none';
-                copyMessageBtn.style.display = 'none';
-
-                const guestName = guestNameInput.value.trim();
-                const prompt = `
-                    山田春翔様と田中結衣様の結婚を祝う、心温まるお祝いのメッセージを生成してください。
-                    フォーマルでありながらも、親しみやすい雰囲気にしてください。
-                    メッセージの長さは150文字程度でお願いします。
-                    ${guestName ? `メッセージの最後に、署名として「${guestName} より」と付け加えてください。` : '署名は不要です。'}
-                    良い例:「ご結婚おめでとうございます！お二人の未来が愛と喜びに満ち溢れるものでありますように。春翔さんと結衣さんの素敵な笑顔が大好きです。末永くお幸せに！」`;
-                
-                try {
-                    const messageText = await callGemini(prompt);
-                    messageResultDiv.textContent = messageText.trim();
-                } catch (error) {
-                    console.error('Error generating message:', error);
-                    messageResultDiv.textContent = 'エラーが発生しました。しばらくしてから再度お試しください。';
-                } finally {
-                    loadingIndicator.style.display = 'none';
-                    messageResultDiv.style.display = 'block';
-                    copyMessageBtn.style.display = 'inline-block';
-                }
-            });
-        }
-
-        // --- Copy to Clipboard Functionality ---
-        if(copyMessageBtn) {
-            copyMessageBtn.addEventListener('click', () => {
-                const textToCopy = messageResultDiv.textContent;
-                const textArea = document.createElement('textarea');
-                textArea.value = textToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    copyMessageBtn.textContent = 'コピーしました！';
-                    setTimeout(() => {
-                        copyMessageBtn.innerHTML = '<i class="fa-solid fa-copy mr-2"></i> テキストをコピー';
-                    }, 2000);
-                } catch (err) {
-                    console.error('Failed to copy text: ', err);
-                    copyMessageBtn.textContent = 'コピーに失敗';
-                }
-                document.body.removeChild(textArea);
-            });
-        }
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'ArrowRight') nextBtn.click();
+                else if (e.key === 'ArrowLeft') prevBtn.click();
+                else if (e.key === 'Escape') closeBtn.click();
+            }
+        });
     </script>
 </body>
 </html>
+
